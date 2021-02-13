@@ -1,0 +1,5 @@
+landingzone = ''
+filename = ''
+driver = ''
+server = ''
+database = ''
