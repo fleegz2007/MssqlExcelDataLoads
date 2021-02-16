@@ -1,11 +1,9 @@
 import sqlScripts
 import config
 
-tablename = ''
-
 def createhdctTable():
-    sql_create_ichg_table = """CREATE TABLE ICHGRPT (
-                                    PERIOD text,
+    sql_create_ichg_table = "CREATE TABLE " + config.table1 + """ (
+                                    PERIOD varchar(MAX),
                                     MID varchar(MAX),
                                     DBA varchar(MAX),
                                     ICHG_CODE varchar(MAX),
@@ -23,11 +21,11 @@ def createhdctTable():
                                     MERCH_BILL float,
                                     DIFF integer, --Need more information on this field
                                     MARKUP_BUY_RT_FEE float,
-
                                 );"""
+
     # create a database connection
-    sql_create_detail_table = """CREATE TABLE DETAIL ( --Need the name of this table
-                                    PERIOD text, --Is this in that 202102 format?
+    sql_create_detail_table = "CREATE TABLE  " + config.table2 + """ (
+                                    PERIOD varchar(MAX), --Is this in that 202102 format?
                                     SUBCHANNEL varchar(MAX),
                                     SHORT varchar(MAX),
                                     CLIENT_G varchar(MAX), --Need to confirm this is text and not a number
@@ -38,7 +36,7 @@ def createhdctTable():
                                     SIC varchar(MAX), --Guessing this is text
                                     SIC_CAT varchar(MAX),
                                     KEY_SWIPE varchar(MAX),
-                                    TIER integer, --Is this float int or text?
+                                    TIER varchar(MAX), --Is this float int or text?
                                     STATUS varchar(MAX),
                                     OPENED_DATE datetime,
                                     DISC_RATE float,
@@ -49,7 +47,7 @@ def createhdctTable():
                                     CREDIT_AM float, --Need to check if this is a float
                                     NET_VOLUME float,
                                     DISC_REV float,
-                                    SURCHARGE_REV float
+                                    SURCHARGE_REV float,
                                     DISC_INC float,
                                     ICHG_EXP float,
                                     ASSESS_EXP float,
@@ -57,7 +55,7 @@ def createhdctTable():
                                     PROC_FEES float,
                                     DISC_EXP float,
                                     NET_DISCOUNT float,
-                                    AUTH_BC_NO int, 
+                                    AUTH_BC_NO float, 
                                     BC_REV float,
                                     BC_EXP float,
                                     OTHER_TNE_NO float,
@@ -106,8 +104,8 @@ def createhdctTable():
                                     GROSS_REV float,
                                     GROSS_EXP float,
                                     AMT_DUE float,
-                                    SPREAD_PERC float,
-                                    PAYEE float,
+                                    SPREAD_PERC int,
+                                    PAYEE varchar(MAX),
                                     AMEX_OPTBLUE_VOL float,
                                     AMEX_OPTBLUE_PROCRATE float,
                                     AMEX_OPTBLUE_COUNT float,
@@ -126,6 +124,7 @@ def createhdctTable():
         cur.execute(sql_create_ichg_table)
         cur.execute(sql_create_detail_table)
         cur.commit()
+        cur.close()
     else:
         print("Error! cannot create the database connection.")
 
