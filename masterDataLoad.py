@@ -17,7 +17,7 @@ datalist = excelScripts.extractExcel(config.landingzone+config.mdfilename)
 print('Extracted all data from Excel document')
 sqlScripts.masterinsert(conn, cur, config.table2, datalist, config.landingzone+config.interchangefilename)
 print('Data loaded. Deleting any null rows')
-sqlScripts.cleanSqlLoad(conn, cur, config.table1)
+sqlScripts.cleanSqlLoad(conn, cur, config.table2)
 print('Complete!')
 
 sys.exit()
